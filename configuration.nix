@@ -19,6 +19,10 @@
   # Enable the Flakes feature and the accompanying new nix command-line tool
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # ZSH
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
+
   # Setup VSCode Remote
   environment.systemPackages = [ pkgs.wget ];
   programs.nix-ld.enable = true;
