@@ -9,6 +9,7 @@
   home.packages = with pkgs; [
     ghq
     git-review
+    nixfmt-rfc-style
   ];
 
   home.shellAliases = {
