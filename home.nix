@@ -21,6 +21,13 @@
 
   programs.zsh = {
     enable = true;
+      plugins = [
+        {
+          name = "vi-mode";
+          src = pkgs.zsh-vi-mode;
+          file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+        }
+      ];
   };
 
   programs.starship = {
@@ -59,5 +66,13 @@
         root = "/home/mnaser/src";
       };
     };
+  };
+
+  programs.neovim = {
+    enable = true;
+
+    viAlias = true;
+    vimAlias = true;
+    defaultEditor = true;
   };
 }
