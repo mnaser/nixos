@@ -43,11 +43,19 @@
     enable = true;
   };
 
-  programs.git = {
+  programs.git = rec {
     enable = true;
 
     userName = "Mohammed Naser";
     userEmail = "mnaser@vexxhost.com";
+
+    hooks = {
+      "prepare-commit-msg" = pkgs.writeShellScript "signOffCheck.sh" ''
+        git interpret-trailers --if-exists doNothing --trailer \
+          "Signed-off-by: ${userName} <${userEmail}>" \
+          --in-place "$1"
+      '';
+    };
 
     extraConfig = {
       init = {
