@@ -111,51 +111,100 @@
       signcolumn = "yes";
     };
 
+    extraPlugins = with pkgs.vimPlugins; [
+      ansible-vim
+    ];
+
     colorschemes.tokyonight.enable = true;
     colorschemes.tokyonight.settings.style = "night";
 
     plugins.sleuth.enable = true;
     plugins.nix.enable = true;
     plugins.lastplace.enable = true;
+    plugins.direnv.enable = true;
 
-    plugins.treesitter.enable = true;
-    plugins.treesitter.settings = {
-      highlight.enable = true;
-      incremental_selection.enable = true;
-      indent.enable = true;
+    plugins.gitsigns = {
+      enable = true;
+
+      settings = {
+        signs = {
+          add = {
+            text = "▍";
+          };
+          change = {
+            text = "▍";
+          };
+          delete = {
+            text = "▍";
+          };
+          topdelete = {
+            text = "▍";
+          };
+          changedelete = {
+            text = "▍";
+          };
+        };
+      };
+    };
+
+    plugins.treesitter = {
+      enable = true;
+
+      settings = {
+        highlight.enable = true;
+        incremental_selection.enable = true;
+        indent.enable = true;
+      };
     };
 
     plugins.blink-cmp-copilot.enable = true;
-    plugins.blink-cmp.enable = true;
-    plugins.blink-cmp.settings.sources = {
-      providers = {
-        copilot = {
-          async = true;
-          module = "blink-cmp-copilot";
-          name = "copilot";
-          score_offset = 100;
-        };
-      };
+    plugins.blink-cmp-git.enable = true;
+    plugins.blink-cmp = {
+      enable = true;
 
-      default = [
-        "lsp"
-        "path"
-        "snippets"
-        "buffer"
-        "copilot"
-      ];
+      settings.sources = {
+        providers = {
+          git = {
+            name = "git";
+            module = "blink-cmp-git";
+          };
+
+          copilot = {
+            name = "copilot";
+            module = "blink-cmp-copilot";
+            async = true;
+            score_offset = 100;
+          };
+        };
+
+        default = [
+          "lsp"
+          "path"
+          "snippets"
+          "buffer"
+          "copilot"
+          "git"
+        ];
+      };
     };
 
-    plugins.conform-nvim.enable = true;
-    plugins.conform-nvim.settings = {
-      formatters = {
-        nixpkgs_fmt = {
-          command = lib.getExe pkgs.nixfmt-rfc-style;
-        };
-      };
+    plugins.conform-nvim = {
+      enable = true;
 
-      formatters_by_ft = {
-        nix = [ "nixpkgs_fmt" ];
+      settings = {
+        formatters = {
+          ansible-lint = {
+            command = lib.getExe pkgs.ansible-lint;
+          };
+          nixpkgs_fmt = {
+            command = lib.getExe pkgs.nixfmt-rfc-style;
+          };
+        };
+
+        formatters_by_ft = {
+          ansible = [ "ansible-lint" ];
+          nix = [ "nixpkgs_fmt" ];
+        };
       };
     };
 
@@ -163,6 +212,7 @@
     plugins.trouble.enable = true;
     plugins.web-devicons.enable = true;
 
+    lsp.servers.ansiblels.enable = true;
     lsp.servers.nixd.enable = true;
     lsp.servers.rust_analyzer.enable = true;
 
