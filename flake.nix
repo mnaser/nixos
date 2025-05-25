@@ -13,9 +13,14 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixos-wsl, home-manager, ... }: {
+  outputs = { self, nixpkgs, nixos-wsl, home-manager, nixvim, ... }: {
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -34,6 +39,9 @@
             home-manager.useUserPackages = true;
 
             home-manager.users.mnaser = import ./home.nix;
+	    home-manager.extraSpecialArgs = {
+	      inherit nixvim;
+	    };
           }
         ];
       };

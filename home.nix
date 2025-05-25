@@ -1,10 +1,19 @@
-{ config, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  nixvim,
+  ...
+}:
 
 {
   home.stateVersion = "25.05";
 
   home.username = "mnaser";
   home.homeDirectory = "/home/mnaser";
+
+  imports = [
+    nixvim.homeManagerModules.nixvim
+  ];
 
   home.packages = with pkgs; [
     ghq
@@ -21,13 +30,13 @@
 
   programs.zsh = {
     enable = true;
-      plugins = [
-        {
-          name = "vi-mode";
-          src = pkgs.zsh-vi-mode;
-          file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
-        }
-      ];
+    plugins = [
+      {
+        name = "vi-mode";
+        src = pkgs.zsh-vi-mode;
+        file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+      }
+    ];
   };
 
   programs.bat = {
@@ -84,11 +93,86 @@
     };
   };
 
-  programs.neovim = {
+  programs.zoxide = {
+    enable = true;
+  };
+
+  programs.nixvim = {
     enable = true;
 
     viAlias = true;
     vimAlias = true;
     defaultEditor = true;
+
+    opts = {
+      cursorline = true;
+      number = true;
+      relativenumber = true;
+      signcolumn = "yes";
+    };
+
+    colorschemes.tokyonight.enable = true;
+    colorschemes.tokyonight.settings.style = "night";
+
+    plugins.sleuth.enable = true;
+    plugins.nix.enable = true;
+    plugins.lastplace.enable = true;
+
+    plugins.treesitter.enable = true;
+    plugins.treesitter.settings = {
+      highlight.enable = true;
+      incremental_selection.enable = true;
+      indent.enable = true;
+    };
+
+    plugins.blink-cmp-copilot.enable = true;
+    plugins.blink-cmp.enable = true;
+    plugins.blink-cmp.settings.sources = {
+      providers = {
+        copilot = {
+          async = true;
+          module = "blink-cmp-copilot";
+          name = "copilot";
+          score_offset = 100;
+        };
+      };
+
+      default = [
+        "lsp"
+        "path"
+        "snippets"
+        "buffer"
+        "copilot"
+      ];
+    };
+
+    plugins.conform-nvim.enable = true;
+    plugins.conform-nvim.settings = {
+      formatters = {
+        nixpkgs_fmt = {
+          command = lib.getExe pkgs.nixfmt-rfc-style;
+        };
+      };
+
+      formatters_by_ft = {
+        nix = [ "nixpkgs_fmt" ];
+      };
+    };
+
+    plugins.lspconfig.enable = true;
+    plugins.trouble.enable = true;
+    plugins.web-devicons.enable = true;
+
+    lsp.servers.nixd.enable = true;
+    lsp.servers.rust_analyzer.enable = true;
+
+    keymaps = [
+      {
+        mode = "n";
+        key = "<leader>f";
+        action = "<cmd>lua require('conform').format()<CR>";
+        options.desc = "Format document";
+      }
+    ];
   };
 }
