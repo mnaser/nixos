@@ -30,6 +30,14 @@
       ];
   };
 
+  programs.bat = {
+    enable = true;
+  };
+
+  programs.ripgrep = {
+    enable = true;
+  };
+
   programs.starship = {
     enable = true;
   };
