@@ -113,10 +113,13 @@
 
     extraPlugins = with pkgs.vimPlugins; [
       ansible-vim
+      blink-cmp-avante
     ];
 
     colorschemes.tokyonight.enable = true;
     colorschemes.tokyonight.settings.style = "night";
+
+    plugins.lz-n.enable = true;
 
     plugins.sleuth.enable = true;
     plugins.nix.enable = true;
@@ -157,6 +160,34 @@
       };
     };
 
+    plugins.render-markdown = {
+      enable = true;
+
+      settings = {
+        file_types = [
+          "markdown"
+          "Avante"
+        ];
+
+        overrides.filetype = {
+          Avante = {
+            render_modes = true;
+          };
+        };
+      };
+    };
+
+    plugins.avante.enable = true;
+    plugins.avante.settings = {
+      claude = {
+        model = "claude-sonnet-4-20250514";
+      };
+    };
+
+    plugins.copilot-lua.settings = {
+      workspace_folders = [ "/home/mnaser/src" ];
+    };
+
     plugins.blink-cmp-copilot.enable = true;
     plugins.blink-cmp-git.enable = true;
     plugins.blink-cmp = {
@@ -164,6 +195,11 @@
 
       settings.sources = {
         providers = {
+          avante = {
+            name = "avante";
+            module = "blink-cmp-avante";
+          };
+
           git = {
             name = "git";
             module = "blink-cmp-git";
@@ -184,6 +220,7 @@
           "buffer"
           "copilot"
           "git"
+          "avante"
         ];
       };
     };
