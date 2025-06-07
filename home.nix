@@ -2,6 +2,7 @@
   lib,
   pkgs,
   nixvim,
+  nixpkgs-master,
   ...
 }:
 
@@ -16,6 +17,7 @@
   ];
 
   home.packages = with pkgs; [
+    nixpkgs-master.claude-code
     ghq
     git-review
   ];

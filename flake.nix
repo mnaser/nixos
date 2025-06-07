@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
@@ -20,31 +21,51 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixos-wsl, home-manager, nixvim, ... }: {
-    nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./configuration.nix
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-master,
+      nixos-wsl,
+      home-manager,
+      nixvim,
+      ...
+    }:
+    {
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
 
-          nixos-wsl.nixosModules.default
-          {
-            wsl.enable = true;
-            wsl.defaultUser = "mnaser";
-          }
+      nixosConfigurations = {
+        nixos = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./configuration.nix
 
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
+            {
+              nixpkgs.config.allowUnfree = true;
+            }
 
-            home-manager.users.mnaser = import ./home.nix;
-	    home-manager.extraSpecialArgs = {
-	      inherit nixvim;
-	    };
-          }
-        ];
+            nixos-wsl.nixosModules.default
+            {
+              wsl.enable = true;
+              wsl.defaultUser = "mnaser";
+            }
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+
+              home-manager.users.mnaser = import ./home.nix;
+              home-manager.extraSpecialArgs = {
+                inherit nixvim;
+                nixpkgs-master = import nixpkgs-master {
+                  system = "x86_64-linux";
+                  config.allowUnfree = true;
+                };
+              };
+            }
+          ];
+        };
       };
     };
-  };
 }
