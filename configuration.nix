@@ -28,22 +28,10 @@
   networking.networkmanager.enable = true;
 
   # Set your time zone.
-  time.timeZone = "America/New_York";
+  time.timeZone = "America/Toronto";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
+  i18n.defaultLocale = "en_CA.UTF-8";
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -51,6 +39,10 @@
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
+  services.desktopManager.gnome.extraGSettingsOverrides = ''
+    [org.gnome.mutter]
+    experimental-features=['scale-monitor-framebuffer', 'xwayland-native-scaling']
+  '';
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -132,14 +124,13 @@
 
   # Power management
   hardware.cpu.intel.updateMicrocode = true;
-  #hardware.enableAllFirmware = true;
-  #powerManagement.powertop.enable = true;
+  hardware.cpu.amd.updateMicrocode = true;
 
   hardware.graphics = {
     enable = true;
   };
 
-  services.xserver.videoDrivers = ["modesetting" "nvidia"];
+  services.xserver.videoDrivers = ["nvidia"];
 
   hardware.nvidia = {
     modesetting.enable = true;
@@ -148,15 +139,6 @@
     open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
-    prime = {
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
-      };
-
-      intelBusId = "PCI:00:02:0";
-      nvidiaBusId = "PCI:01:00:0";
-    };
   };
 
   programs._1password.enable = true;
