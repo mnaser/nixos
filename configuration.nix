@@ -123,8 +123,7 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
   # Power management
-  hardware.cpu.intel.updateMicrocode = true;
-  hardware.cpu.amd.updateMicrocode = true;
+  hardware.enableRedistributableFirmware = true;
 
   hardware.graphics = {
     enable = true;
