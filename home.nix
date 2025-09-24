@@ -16,17 +16,38 @@
   # changes in each release.
   home.stateVersion = "25.05";
 
-  home.packages = with pkgs; [
-    claude-code
-    discord
-    ghq
-    teams-for-linux
-  ];
+  home.packages =
+    with pkgs;
+    [
+      claude-code
+      discord
+      ghq
+      teams-for-linux
+    ]
+    ++ (with pkgs.gnomeExtensions; [
+      bing-wallpaper-changer
+    ]);
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   programs.bash.enable = true;
+
+  dconf.settings = {
+    "org/gnome/shell" = {
+      enabled-extensions = [
+        "BingWallpaper@ineffable-gmail.com"
+      ];
+    };
+
+    "org/gnome/shell/extensions/bingwallpaper" = {
+      icon-name = "high-frame-symbolic";
+      set-background = true;
+      override-lockscreen-blur = true;
+      lockscreen-blur-strength = 2;
+      lockscreen-blur-brightness = 30;
+    };
+  };
 
   programs.gh.enable = true;
   programs.vim.enable = true;
