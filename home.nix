@@ -17,16 +17,36 @@
   home.stateVersion = "25.05";
 
   home.packages = with pkgs; [
+    claude-code
+    discord
+    ghq
     teams-for-linux
   ];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  programs.bash.enable = true;
+
   programs.gh.enable = true;
   programs.vim.enable = true;
+
+  programs.ssh.enable = true;
+  programs.ssh.matchBlocks = {
+    "*" = {
+      identityAgent = "~/.1password/agent.sock";
+    };
+  };
 
   programs.git.enable = true;
   programs.git.userName = "Mohammed Naser";
   programs.git.userEmail = "mnaser@vexxhost.com";
+  programs.git.extraConfig = {
+    ghq = {
+      root = "~/src";
+    };
+  };
+
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
 }
