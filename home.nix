@@ -25,6 +25,7 @@
       ghq
       pinentry-gnome3
       teams-for-linux
+      zoom-us
     ]
     ++ (with pkgs.gnomeExtensions; [
       bing-wallpaper-changer
@@ -49,10 +50,28 @@
       lockscreen-blur-strength = 2;
       lockscreen-blur-brightness = 30;
     };
+
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+    };
   };
 
   programs.gh.enable = true;
-  programs.vim.enable = true;
+
+  programs.nixvim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+
+    plugins.blink-cmp = {
+      enable = true;
+
+      settings.sources.default = [
+        "copilot"
+      ];
+    };
+  };
 
   programs.ssh.enable = true;
   programs.ssh.matchBlocks = {

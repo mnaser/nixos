@@ -76,7 +76,7 @@
   users.users.mnaser = {
     isNormalUser = true;
     description = "Mohammed Naser";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
     packages = with pkgs; [
     #  thunderbird
     ];
@@ -149,4 +149,8 @@
   services.tailscale.enable = true;
 
   services.yubikey-agent.enable = true;
+
+  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.qemu.swtpm.enable = true;
+  programs.virt-manager.enable = true;
 }
