@@ -64,8 +64,25 @@
     viAlias = true;
     vimAlias = true;
 
+    plugins.copilot-lua.settings.filetypes = {
+      yaml = true;
+    };
+
+    plugins.blink-copilot.enable = true;
+
     plugins.blink-cmp = {
       enable = true;
+
+      settings.keymap.preset = "super-tab";
+
+      settings.sources.providers = {
+        copilot = {
+          name = "copilot";
+          module = "blink-copilot";
+          score_offset = 100;
+          async = true;
+        };
+      };
 
       settings.sources.default = [
         "copilot"
