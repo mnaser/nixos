@@ -26,6 +26,7 @@
     ]
     ++ (with pkgs.gnomeExtensions; [
       bing-wallpaper-changer
+      clipboard-indicator
     ]);
 
   # Let Home Manager install and manage itself.
@@ -37,7 +38,12 @@
     "org/gnome/shell" = {
       enabled-extensions = [
         "BingWallpaper@ineffable-gmail.com"
+        "clipboard-indicator@tudmotu.com"
       ];
+    };
+
+    "org/gnome/shell/weather" = {
+      automatic-location = true;
     };
 
     "org/gnome/shell/extensions/bingwallpaper" = {
