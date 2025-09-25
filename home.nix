@@ -19,9 +19,11 @@
   home.packages =
     with pkgs;
     [
+      chatterino7
       claude-code
       discord
       ghq
+      pinentry-gnome3
       teams-for-linux
     ]
     ++ (with pkgs.gnomeExtensions; [

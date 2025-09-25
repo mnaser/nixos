@@ -147,4 +147,6 @@
   };
 
   services.tailscale.enable = true;
+
+  services.yubikey-agent.enable = true;
 }
