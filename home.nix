@@ -64,6 +64,22 @@
     viAlias = true;
     vimAlias = true;
 
+    lsp.servers = {
+      nixd = {
+        enable = true;
+      };
+    };
+
+    plugins = {
+      lspconfig = {
+        enable = true;
+      };
+
+      trouble = {
+        enable = true;
+      };
+    };
+
     plugins.copilot-lua.settings.filetypes = {
       yaml = true;
     };
