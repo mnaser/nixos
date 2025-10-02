@@ -19,10 +19,13 @@
   home.packages =
     with pkgs;
     [
+      chatterino7
       claude-code
       discord
       ghq
+      pinentry-gnome3
       teams-for-linux
+      zoom-us
     ]
     ++ (with pkgs.gnomeExtensions; [
       bing-wallpaper-changer
@@ -53,10 +56,61 @@
       lockscreen-blur-strength = 2;
       lockscreen-blur-brightness = 30;
     };
+
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+    };
   };
 
   programs.gh.enable = true;
-  programs.vim.enable = true;
+
+  programs.nixvim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+
+    lsp.servers = {
+      nixd = {
+        enable = true;
+      };
+    };
+
+    plugins = {
+      lspconfig = {
+        enable = true;
+      };
+
+      trouble = {
+        enable = true;
+      };
+    };
+
+    plugins.copilot-lua.settings.filetypes = {
+      yaml = true;
+    };
+
+    plugins.blink-copilot.enable = true;
+
+    plugins.blink-cmp = {
+      enable = true;
+
+      settings.keymap.preset = "super-tab";
+
+      settings.sources.providers = {
+        copilot = {
+          name = "copilot";
+          module = "blink-copilot";
+          score_offset = 100;
+          async = true;
+        };
+      };
+
+      settings.sources.default = [
+        "copilot"
+      ];
+    };
+  };
 
   programs.ssh.enable = true;
   programs.ssh.matchBlocks = {
