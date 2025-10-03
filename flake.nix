@@ -15,7 +15,13 @@
   };
 
   outputs =
-    { nixpkgs, home-manager, niri, nixvim, ... }:
+    {
+      nixpkgs,
+      home-manager,
+      niri,
+      nixvim,
+      ...
+    }:
     {
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
@@ -23,16 +29,16 @@
           modules = [
             ./configuration.nix
             home-manager.nixosModules.home-manager
-{
-  nixpkgs.overlays = [ niri.overlays.niri ];
-}
+            {
+              nixpkgs.overlays = [ niri.overlays.niri ];
+            }
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.mnaser = ./home.nix;
 
               home-manager.sharedModules = [
-		niri.homeModules.niri
+                niri.homeModules.niri
                 nixvim.homeModules.nixvim
               ];
 
