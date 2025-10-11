@@ -2,8 +2,8 @@
 
 {
   imports = [
-    ./config/vscode.nix
-    ./config/git.nix
+    ./config/home-manager/vscode.nix
+    ./config/home-manager/git.nix
   ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
