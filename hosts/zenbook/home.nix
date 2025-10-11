@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../config/home-manager/bash.nix
     ../../config/home-manager/ssh.nix
     ../../config/home-manager/ghq.nix
     ../../config/home-manager/direnv.nix
@@ -43,8 +44,6 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  programs.bash.enable = true;
 
   dconf.settings = {
     "org/gnome/system/location" = {
