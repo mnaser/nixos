@@ -25,6 +25,7 @@
     }:
     let
       system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
       treefmtEval = treefmt-nix.lib.evalModule nixpkgs.legacyPackages.x86_64-linux {
         projectRootFile = "flake.nix";
         programs.nixfmt.enable = true;
