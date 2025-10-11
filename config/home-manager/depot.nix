@@ -25,7 +25,6 @@ let
       ldflags+=" -X github.com/depot/cli/internal/build.Date=$(cat BUILD_COMMIT_DATE)"
     '';
 
-
     ldflags =
       let
         t = "github.com/depot/cli/internal/build";
