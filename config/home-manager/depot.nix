@@ -9,10 +9,22 @@ let
       owner = "depot";
       repo = "cli";
       tag = "v${version}";
-      hash = "sha256-XJnnDVHbUB40Y+cAerrybhlvQjFAnAckDDNjLmkKXyc=";
+      hash = "sha256-qUuCFRheNzWhbhCcxb9e6CuuXF7bjQcmVw5FZY/Mm2E=";
+
+      leaveDotGit = true;
+      postFetch = ''
+        cd "$out"
+        date -u -d "@$(git log -1 --pretty=%ct)" "+%Y-%m-%d" > $out/BUILD_COMMIT_DATE
+        find "$out" -name .git -print0 | xargs -0 rm -rf
+      '';
     };
 
     vendorHash = "sha256-NsSc5bod+7Gb1RBZajjBIYaIRXPOn62ZTu6R/kJzbMA=";
+
+    preBuild = ''
+      ldflags+=" -X github.com/depot/cli/internal/build.Date=$(cat BUILD_COMMIT_DATE)"
+    '';
+
 
     ldflags =
       let
@@ -20,7 +32,6 @@ let
       in
       [
         "-X ${t}.Version=${version}"
-        "-X ${t}.Date=1970-01-01T01:01:01Z"
         "-X ${t}.SentryEnvironment=release"
       ];
   };
