@@ -8,6 +8,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../config/nixos/tailscale.nix
   ];
 
   # Bootloader.
@@ -149,8 +150,6 @@
     enable = true;
     polkitPolicyOwners = [ "mnaser" ];
   };
-
-  services.tailscale.enable = true;
 
   services.yubikey-agent.enable = true;
 

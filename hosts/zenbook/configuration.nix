@@ -141,6 +141,4 @@
     enable = true;
     polkitPolicyOwners = [ "mnaser" ];
   };
-
-  services.tailscale.enable = true;
 }
