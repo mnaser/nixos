@@ -44,7 +44,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.mnaser = ./home.nix;
+              home-manager.users.mnaser = ./hosts/rig/home.nix;
 
               home-manager.sharedModules = [
                 nixvim.homeModules.nixvim
@@ -64,7 +64,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.mnaser = ./home.nix;
+              home-manager.users.mnaser = ./hosts/zenbook/home.nix;
 
               home-manager.sharedModules = [
                 nixvim.homeModules.nixvim
