@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../config/home-manager/ssh.nix
     ../../config/home-manager/ghq.nix
     ../../config/home-manager/direnv.nix
     ../../config/home-manager/git.nix
@@ -136,8 +137,6 @@
       ];
     };
   };
-
-  programs.ssh.enable = true;
 
   services.syncthing.settings = {
     folders = {
