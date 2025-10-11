@@ -42,6 +42,10 @@ in
       "git.alwaysSignOff" = true;
       "git.confirmSync" = false;
       "github.copilot.nextEditSuggestions.enabled" = true;
+      "window.autoDetectColorScheme" = true;
+      "workbench.iconTheme" = "catppuccin-mocha";
+      "workbench.preferredDarkColorTheme" = "Catppuccin Mocha";
+      "workbench.preferredLightColorTheme" = "Catppuccin Latte";
     };
   };
 }
