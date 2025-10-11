@@ -24,6 +24,7 @@
       ...
     }:
     let
+      system = "x86_64-linux";
       treefmtEval = treefmt-nix.lib.evalModule nixpkgs.legacyPackages.x86_64-linux {
         projectRootFile = "flake.nix";
         programs.nixfmt.enable = true;
@@ -34,7 +35,7 @@
 
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          inherit system;
           modules = [
             ./configuration.nix
             ./modules/services/hardware/openlinkhub.nix
@@ -53,6 +54,32 @@
             }
           ];
         };
+
+        zenbook = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./systems/zenbook/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.mnaser = ./home.nix;
+
+              home-manager.sharedModules = [
+                nixvim.homeModules.nixvim
+              ];
+
+              # Optionally, use home-manager.extraSpecialArgs to pass
+              # arguments to home.nix
+            }
+          ];
+        };
+      };
+
+      devShells.${system}.default = pkgs.mkShell {
+        packages = with pkgs; [
+          nixfmt-rfc-style
+        ];
       };
     };
 }
