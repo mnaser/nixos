@@ -8,8 +8,11 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../config/nixos/desktop-manager.nix
+    ../../config/nixos/gnome.nix
     ../../config/nixos/1password.nix
     ../../config/nixos/tailscale.nix
+    ../../config/nixos/evolution.nix
   ];
 
   # Bootloader.
@@ -37,14 +40,6 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
-  services.desktopManager.gnome.extraGSettingsOverrides = ''
-    [org.gnome.mutter]
-    experimental-features=['scale-monitor-framebuffer', 'xwayland-native-scaling']
-  '';
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -155,12 +150,4 @@
   programs.virt-manager.enable = true;
 
   services.hardware.openlinkhub.enable = true;
-
-  services.gnome.gnome-keyring.enable = true;
-  services.gnome.gnome-online-accounts.enable = true;
-  services.gnome.evolution-data-server.enable = true;
-  programs.evolution.enable = true;
-  programs.evolution.plugins = with pkgs; [
-    evolution-ews
-  ];
 }
