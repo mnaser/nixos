@@ -35,10 +35,10 @@
       formatter.x86_64-linux = treefmtEval.config.build.wrapper;
 
       nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
+        rig = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            ./configuration.nix
+            ./hosts/rig/configuration.nix
             ./modules/services/hardware/openlinkhub.nix
             home-manager.nixosModules.home-manager
             {
@@ -59,7 +59,7 @@
         zenbook = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            ./systems/zenbook/configuration.nix
+            ./hosts/zenbook/configuration.nix
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
