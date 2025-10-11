@@ -8,6 +8,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../config/nixos/1password.nix
     ../../config/nixos/tailscale.nix
   ];
 
@@ -143,12 +144,6 @@
     open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-
-  programs._1password.enable = true;
-  programs._1password-gui = {
-    enable = true;
-    polkitPolicyOwners = [ "mnaser" ];
   };
 
   services.yubikey-agent.enable = true;

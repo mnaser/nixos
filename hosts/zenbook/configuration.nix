@@ -8,6 +8,8 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../config/nixos/1password.nix
+    ../../config/nixos/tailscale.nix
   ];
 
   # Bootloader.
@@ -135,10 +137,4 @@
 
   #services.xserver.videoDrivers = ["modesetting" "nvidia"];
   hardware.graphics.enable = true;
-
-  programs._1password.enable = true;
-  programs._1password-gui = {
-    enable = true;
-    polkitPolicyOwners = [ "mnaser" ];
-  };
 }
