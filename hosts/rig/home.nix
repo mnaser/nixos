@@ -3,7 +3,6 @@
 {
   imports = [
     ../../config/home-manager/git.nix
-    ../../config/home-manager/syncthing.nix
     ../../config/home-manager/vscode.nix
   ];
   # Home Manager needs a bit of information about you and the
