@@ -2,8 +2,9 @@
 
 {
   imports = [
-    ./config/home-manager/vscode.nix
     ./config/home-manager/git.nix
+    ./config/home-manager/syncthing.nix
+    ./config/home-manager/vscode.nix
   ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -145,4 +146,21 @@
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
+
+  services.syncthing.settings = {
+    folders = {
+      "~/src" = {
+        id = "src";
+        devices = [
+          "rig"
+          "zenbook"
+        ];
+      };
+    };
+
+    devices = {
+      rig.id = "2PLIG57-UBUKHH3-CY64L2S-MOLUJ7D-GGONVBN-AKK725T-LFB3AKE-JNYO2QY";
+      zenbook.id = "TCJCGXO-QYXIZTD-S4GOTCL-AVVGOFK-ODSVGQD-DUQIZEL-WRP4TAR-TCERDAT";
+    };
+  };
 }

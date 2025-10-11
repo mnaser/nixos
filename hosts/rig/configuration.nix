@@ -13,8 +13,6 @@
     ../../config/nixos/1password.nix
     ../../config/nixos/tailscale.nix
     ../../config/nixos/evolution.nix
-    ../../config/nixos/syncthing.nix
-    ../../config/syncthing-devices/zenbook.nix
   ];
 
   # Bootloader.
