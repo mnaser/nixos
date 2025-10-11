@@ -18,9 +18,5 @@ rec {
     init = {
       defaultBranch = "main";
     };
-
-    ghq = {
-      root = "~/src";
-    };
   };
 }

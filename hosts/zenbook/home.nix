@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../config/home-manager/ghq.nix
     ../../config/home-manager/git.nix
     ../../config/home-manager/vscode.nix
   ];
