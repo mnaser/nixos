@@ -27,7 +27,6 @@
       chatterino7
       claude-code
       discord
-      ghq
       openlinkhub
       pinentry-gnome3
       teams-for-linux
