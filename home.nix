@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./config/vscode.nix
+    ./config/git.nix
+  ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "mnaser";
@@ -139,17 +143,6 @@
     };
   };
 
-  programs.git.enable = true;
-  programs.git.userName = "Mohammed Naser";
-  programs.git.userEmail = "mnaser@vexxhost.com";
-  programs.git.extraConfig = {
-    ghq = {
-      root = "~/src";
-    };
-  };
-
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
-
-  programs.vscode.enable = true;
 }
