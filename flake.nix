@@ -9,16 +9,35 @@
 
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
+
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
-    { nixpkgs, home-manager, nixvim, ... }:
     {
+      self,
+      nixpkgs,
+      home-manager,
+      nixvim,
+      treefmt-nix,
+      ...
+    }:
+    let
+      treefmtEval = treefmt-nix.lib.evalModule nixpkgs.legacyPackages.x86_64-linux {
+        projectRootFile = "flake.nix";
+        programs.nixfmt.enable = true;
+      };
+    in
+    {
+      formatter.x86_64-linux = treefmtEval.config.build.wrapper;
+
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             ./configuration.nix
+            ./modules/services/hardware/openlinkhub.nix
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;

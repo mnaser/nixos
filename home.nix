@@ -23,6 +23,7 @@
       claude-code
       discord
       ghq
+      openlinkhub
       pinentry-gnome3
       teams-for-linux
       zoom-us
@@ -37,6 +38,10 @@
   programs.home-manager.enable = true;
 
   programs.bash.enable = true;
+  programs.bash.sessionVariables = {
+    DEPOT_INSTALL_DIR = "/home/mnaser/.depot/bin";
+    PATH = "$DEPOT_INSTALL_DIR:$PATH";
+  };
 
   dconf.settings = {
     "org/gnome/system/location" = {
@@ -73,8 +78,8 @@
     };
 
     "org/virt-manager/virt-manager/connections" = {
-      autoconnect = ["qemu:///system"];
-      uris = ["qemu:///system"];
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
     };
   };
 
@@ -145,4 +150,6 @@
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
+
+  programs.vscode.enable = true;
 }
