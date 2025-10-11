@@ -10,6 +10,8 @@
     ./hardware-configuration.nix
     ../../config/nixos/desktop-manager.nix
     ../../config/nixos/gnome.nix
+    ../../config/nixos/docker.nix
+    ../../config/nixos/libvirtd.nix
     ../../config/nixos/1password.nix
     ../../config/nixos/tailscale.nix
     ../../config/nixos/evolution.nix
@@ -77,8 +79,6 @@
     extraGroups = [
       "networkmanager"
       "wheel"
-      "libvirtd"
-      "docker"
     ];
     packages = with pkgs; [
       #  thunderbird
@@ -143,12 +143,6 @@
   };
 
   services.yubikey-agent.enable = true;
-
-  virtualisation.docker.enable = true;
-
-  virtualisation.libvirtd.enable = true;
-  virtualisation.libvirtd.qemu.swtpm.enable = true;
-  programs.virt-manager.enable = true;
 
   services.hardware.openlinkhub.enable = true;
 }

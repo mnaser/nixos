@@ -10,6 +10,8 @@
     ./hardware-configuration.nix
     ../../config/nixos/desktop-manager.nix
     ../../config/nixos/gnome.nix
+    ../../config/nixos/docker.nix
+    ../../config/nixos/libvirtd.nix
     ../../config/nixos/1password.nix
     ../../config/nixos/tailscale.nix
     ../../config/nixos/evolution.nix
