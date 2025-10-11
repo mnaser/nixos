@@ -14,8 +14,8 @@ let
     mktplcRef = {
       publisher = "github";
       name = "copilot-chat";
-      version = "0.32.2025100703";
-      hash = "sha256-U+l8lbX4STVDd6G5WrSIaGvShUxr1XArDX5Zb28uR3A=";
+      version = "0.32.0";
+      hash = "sha256-0B4ZJd2D+GY2CpVB4gyJ3NHiLS1HiG948Ycu7UCysF0=";
     };
   };
 
