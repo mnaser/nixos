@@ -29,7 +29,6 @@
     chatterino7
     claude-code
     discord
-    openlinkhub
     pinentry-gnome3
     teams-for-linux
     zoom-us
