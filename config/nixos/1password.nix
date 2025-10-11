@@ -10,6 +10,12 @@
   home-manager.users.mnaser =
     { ... }:
     {
+      programs.ssh.matchBlocks = {
+        "*" = {
+          identityAgent = "~/.1password/agent.sock";
+        };
+      };
+
       programs.git.signing = {
         format = "ssh";
         signer = lib.getExe' pkgs._1password-gui "op-ssh-sign";

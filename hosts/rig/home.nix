@@ -137,11 +137,6 @@
   };
 
   programs.ssh.enable = true;
-  programs.ssh.matchBlocks = {
-    "*" = {
-      identityAgent = "~/.1password/agent.sock";
-    };
-  };
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
