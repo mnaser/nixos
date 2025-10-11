@@ -6,6 +6,7 @@
     ../../config/home-manager/ghq.nix
     ../../config/home-manager/direnv.nix
     ../../config/home-manager/git.nix
+    ../../config/home-manager/depot.nix
     ../../config/home-manager/vscode.nix
   ];
   # Home Manager needs a bit of information about you and the

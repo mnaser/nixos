@@ -6,6 +6,7 @@
     ../../config/home-manager/ghq.nix
     ../../config/home-manager/direnv.nix
     ../../config/home-manager/git.nix
+    ../../config/home-manager/depot.nix
     ../../config/home-manager/vscode.nix
   ];
   # Home Manager needs a bit of information about you and the
@@ -44,10 +45,6 @@
   programs.home-manager.enable = true;
 
   programs.bash.enable = true;
-  programs.bash.sessionVariables = {
-    DEPOT_INSTALL_DIR = "/home/mnaser/.depot/bin";
-    PATH = "$DEPOT_INSTALL_DIR:$PATH";
-  };
 
   dconf.settings = {
     "org/gnome/system/location" = {
