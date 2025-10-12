@@ -21,8 +21,9 @@ let
 
 in
 {
-  programs.vscode.enable = true;
+  home.packages = with pkgs; [ monaspace ];
 
+  programs.vscode.enable = true;
   programs.vscode.profiles.default = {
     extensions =
       with pkgs.vscode-extensions;
@@ -38,6 +39,9 @@ in
       ];
 
     userSettings = {
+      "editor.fontFamily" = "'Monaspace Neon', monospace";
+      "editor.fontLigatures" = "'calt', 'liga', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09'";
+      "editor.inlineSuggest.fontFamily" = "'Monaspace Krypton', monospace";
       "files.insertFinalNewline" = true;
       "git.alwaysSignOff" = true;
       "git.confirmSync" = false;
