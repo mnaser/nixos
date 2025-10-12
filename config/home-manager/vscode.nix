@@ -40,11 +40,23 @@ in
 
     userSettings = {
       "editor.fontFamily" = "'Monaspace Neon', monospace";
-      "editor.fontLigatures" = "'calt', 'liga', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09'";
+      "editor.fontLigatures" =
+        "'calt', 'liga', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09'";
       "editor.inlineSuggest.fontFamily" = "'Monaspace Krypton', monospace";
       "files.insertFinalNewline" = true;
       "git.alwaysSignOff" = true;
       "git.confirmSync" = false;
+      "github.copilot.chat.commitMessageGeneration.instructions" = [
+        {
+          text = "Use conventional commit message format (based on @commitlint/config-conventional).";
+        }
+        {
+          text = "Do not exceed 72 characters for the subject line.";
+        }
+        {
+          text = "Use lowercase letters for the subject line.";
+        }
+      ];
       "github.copilot.nextEditSuggestions.enabled" = true;
       "window.autoDetectColorScheme" = true;
       "workbench.iconTheme" = "catppuccin-mocha";
