@@ -56,6 +56,9 @@ in
         {
           text = "Use lowercase letters for the subject line.";
         }
+        {
+          text = "Do not use the prefix 'feat:' unless the commit introduces a new user facing feature.";
+        }
       ];
       "github.copilot.nextEditSuggestions.enabled" = true;
       "window.autoDetectColorScheme" = true;
