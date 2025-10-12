@@ -14,7 +14,7 @@
         font-family = "Monaspace Neon";
         font-size = 11;
       };
-      
+
       programs.ssh.matchBlocks = {
         "*" = {
           setEnv = {
