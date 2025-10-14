@@ -13,14 +13,7 @@
         theme = "light:Catppuccin Latte,dark:Catppuccin Mocha";
         font-family = "Monaspace Neon";
         font-size = 11;
-      };
-
-      programs.ssh.matchBlocks = {
-        "*" = {
-          setEnv = {
-            TERM = "xterm-256color";
-          };
-        };
+        shell-integration-features = true;
       };
     };
 }
