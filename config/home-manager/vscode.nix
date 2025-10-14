@@ -60,6 +60,9 @@ in
           text = "Do not use the prefix 'feat:' unless the commit introduces a new user facing feature.";
         }
       ];
+      "github.copilot.enable" = {
+        "*" = true;
+      };
       "github.copilot.nextEditSuggestions.enabled" = true;
       "window.autoDetectColorScheme" = true;
       "workbench.iconTheme" = "catppuccin-mocha";
