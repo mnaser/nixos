@@ -32,6 +32,7 @@ in
         catppuccin.catppuccin-vsc-icons
         jnoortheen.nix-ide
         mkhl.direnv
+        rust-lang.rust-analyzer
       ]
       ++ [
         github-copilot
