@@ -10,10 +10,10 @@
 
       programs.ghostty.enable = true;
       programs.ghostty.settings = {
-        theme = "light:Catppuccin Latte,dark:Catppuccin Mocha";
         font-family = "Monaspace Neon";
         font-size = 11;
         shell-integration-features = true;
+        theme = "light:Catppuccin Latte,dark:Catppuccin Mocha";
       };
     };
 }
