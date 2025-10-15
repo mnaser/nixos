@@ -32,6 +32,7 @@ in
         catppuccin.catppuccin-vsc-icons
         jnoortheen.nix-ide
         mkhl.direnv
+        ms-vscode-remote.remote-ssh
         redhat.vscode-yaml
         rust-lang.rust-analyzer
       ]
