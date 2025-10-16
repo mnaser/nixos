@@ -1,6 +1,15 @@
 { pkgs, ... }:
 
 let
+  atlassian-atlascode = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+    mktplcRef = {
+      publisher = "Atlassian";
+      name = "atlascode";
+      version = "4.1.12";
+      hash = "sha256-NiRgmE7JIjCcdELJu9X7Ks+tB/g2quQrwGhvhJ1bQQw=";
+    };
+  };
+
   github-copilot = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
     mktplcRef = {
       publisher = "github";
@@ -28,6 +37,7 @@ in
     extensions =
       with pkgs.vscode-extensions;
       [
+        atlassian-atlascode
         catppuccin.catppuccin-vsc
         catppuccin.catppuccin-vsc-icons
         jnoortheen.nix-ide
