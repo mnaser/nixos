@@ -3,7 +3,9 @@
 {
   imports = [
     ../../config/home-manager/bash.nix
+    ../../config/home-manager/starship.nix
     ../../config/home-manager/eza.nix
+    ../../config/home-manager/zoxide.nix
     ../../config/home-manager/ssh.nix
     ../../config/home-manager/ghq.nix
     ../../config/home-manager/direnv.nix
