@@ -28,6 +28,15 @@ let
     };
   };
 
+  opentofu-vscode-opentofu = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+    mktplcRef = {
+      publisher = "opentofu";
+      name = "vscode-opentofu";
+      version = "0.4.2";
+      hash = "sha256-27D28MMytOZMLf24cBCR/uJZuBVngGrhoLvrTjv+Xt0=";
+    };
+  };
+
 in
 {
   home.packages = with pkgs; [ monaspace ];
@@ -43,6 +52,7 @@ in
         jnoortheen.nix-ide
         mkhl.direnv
         ms-vscode-remote.remote-ssh
+        opentofu-vscode-opentofu
         redhat.vscode-yaml
         rust-lang.rust-analyzer
       ]
