@@ -1,6 +1,15 @@
 { pkgs, ... }:
 
 let
+  anthropic-claude-code = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+    mktplcRef = {
+      publisher = "anthropic";
+      name = "claude-code";
+      version = "2.0.21";
+      hash = "sha256-D6TYXb4GnqZKNAZ8rqsYmjazhc7lUnhOfuvis3MVV5k=";
+    };
+  };
+
   atlassian-atlascode = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
     mktplcRef = {
       publisher = "Atlassian";
@@ -46,11 +55,18 @@ in
     extensions =
       with pkgs.vscode-extensions;
       [
+        anthropic-claude-code
         atlassian-atlascode
         catppuccin.catppuccin-vsc
         catppuccin.catppuccin-vsc-icons
         jnoortheen.nix-ide
         mkhl.direnv
+        ms-python.black-formatter
+        ms-python.isort
+        ms-python.mypy-type-checker
+        ms-python.pylint
+        ms-python.python
+        ms-python.vscode-pylance
         ms-vscode-remote.remote-ssh
         opentofu-vscode-opentofu
         redhat.vscode-yaml

@@ -12,7 +12,7 @@
       programs.ghostty.settings = {
         font-family = "Monaspace Neon";
         font-size = 11;
-        shell-integration-features = true;
+        shell-integration-features = "cursor,sudo,title,ssh-env";
         theme = "light:Catppuccin Latte,dark:Catppuccin Mocha";
       };
     };
