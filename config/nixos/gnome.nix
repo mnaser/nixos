@@ -22,6 +22,10 @@
           color-scheme = "prefer-dark";
         };
 
+        "/org/gnome/mutter" = {
+          workspaces-only-on-primary = false;
+        };
+
         "org/gnome/shell" = {
           enabled-extensions = [
             "appindicatorsupport@rgcjonas.gmail.com"

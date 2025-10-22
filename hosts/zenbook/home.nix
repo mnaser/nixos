@@ -33,6 +33,7 @@
     claude-code
     discord
     pinentry-gnome3
+    spotify
     teams-for-linux
     zoom-us
   ];

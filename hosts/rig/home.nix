@@ -34,6 +34,7 @@
     discord
     openlinkhub
     pinentry-gnome3
+    spotify
     teams-for-linux
     zoom-us
   ];
