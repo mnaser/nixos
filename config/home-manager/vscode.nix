@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 let
   anthropic-claude-code = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
@@ -14,26 +14,8 @@ let
     mktplcRef = {
       publisher = "Atlassian";
       name = "atlascode";
-      version = "4.1.12";
+      version = "4.1.24";
       hash = "sha256-NiRgmE7JIjCcdELJu9X7Ks+tB/g2quQrwGhvhJ1bQQw=";
-    };
-  };
-
-  github-copilot = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
-    mktplcRef = {
-      publisher = "github";
-      name = "copilot";
-      version = "1.380.1802";
-      hash = "sha256-zCXq4g/WN0mh52vnzSY4mUFOEfQKUoOVT0K0xRtkM78=";
-    };
-  };
-
-  github-copilot-chat = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
-    mktplcRef = {
-      publisher = "github";
-      name = "copilot-chat";
-      version = "0.32.0";
-      hash = "sha256-0B4ZJd2D+GY2CpVB4gyJ3NHiLS1HiG948Ycu7UCysF0=";
     };
   };
 
@@ -44,6 +26,11 @@ let
       version = "0.4.2";
       hash = "sha256-27D28MMytOZMLf24cBCR/uJZuBVngGrhoLvrTjv+Xt0=";
     };
+
+    postInstall = ''
+      cd "$out/$installPrefix"
+      ${lib.getExe pkgs.jq} '.contributes.configuration[1].properties."opentofu.languageServer.path".default = "${pkgs.tofu-ls}/bin/tofu-ls"' package.json | ${lib.getExe' pkgs.moreutils "sponge"} package.json
+    '';
   };
 
 in
@@ -55,10 +42,11 @@ in
     extensions =
       with pkgs.vscode-extensions;
       [
-        anthropic-claude-code
-        atlassian-atlascode
         catppuccin.catppuccin-vsc
         catppuccin.catppuccin-vsc-icons
+        github.copilot
+        github.copilot-chat
+        golang.go
         jnoortheen.nix-ide
         mkhl.direnv
         ms-python.black-formatter
@@ -68,20 +56,25 @@ in
         ms-python.python
         ms-python.vscode-pylance
         ms-vscode-remote.remote-ssh
-        opentofu-vscode-opentofu
         redhat.vscode-yaml
         rust-lang.rust-analyzer
+        vscodevim.vim
       ]
       ++ [
-        github-copilot
-        github-copilot-chat
+        anthropic-claude-code
+        atlassian-atlascode
+        opentofu-vscode-opentofu
       ];
 
     userSettings = {
+      "atlascode.rovodev.enabled" = false;
+      "atlascode.bitbucket.enabled" = false;
+      "claudeCode.claudeProcessWrapper" = lib.getExe pkgs.claude-code;
       "editor.fontFamily" = "'Monaspace Neon', monospace";
       "editor.fontLigatures" =
         "'calt', 'liga', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09'";
       "editor.inlineSuggest.fontFamily" = "'Monaspace Krypton', monospace";
+      "extensions.autoUpdate" = false;
       "files.insertFinalNewline" = true;
       "git.alwaysSignOff" = true;
       "git.confirmSync" = false;
@@ -103,10 +96,15 @@ in
         "*" = true;
       };
       "github.copilot.nextEditSuggestions.enabled" = true;
+      "update.mode" = "none";
       "window.autoDetectColorScheme" = true;
       "workbench.iconTheme" = "catppuccin-mocha";
       "workbench.preferredDarkColorTheme" = "Catppuccin Mocha";
       "workbench.preferredLightColorTheme" = "Catppuccin Latte";
+      "yaml.schemas" = {
+        "file:///home/mnaser/.vscode/extensions/atlassian.atlascode-${atlassian-atlascode.version}/resources/schemas/pipelines-schema.json" =
+          "bitbucket-pipelines.yml";
+      };
     };
   };
 }

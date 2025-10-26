@@ -69,6 +69,22 @@
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
+
+    extraConfig.pipewire = {
+      "10-clock-rate" = {
+        "context.properties" = {
+          "default.clock.rate" = 192000;
+          "default.allowed-rates" = [
+            44100
+            48000
+            88200
+            96000
+            176400
+            192000
+          ];
+        };
+      };
+    };
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
