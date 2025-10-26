@@ -9,6 +9,8 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../config/nixos/plymouth.nix
+    ../../config/nixos/iio.nix
+    ../../config/nixos/fwupd.nix
     ../../config/nixos/desktop-manager.nix
     ../../config/nixos/gnome.nix
     ../../config/nixos/ghostty.nix
