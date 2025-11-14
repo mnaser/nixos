@@ -16,7 +16,7 @@
         theme = "light:Catppuccin Latte,dark:Catppuccin Mocha";
         window-height = 36;
         window-padding-color = "extend";
-        window-width = 160;
+        window-width = 120;
       };
     };
 }
