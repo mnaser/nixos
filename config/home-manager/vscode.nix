@@ -69,11 +69,14 @@ in
     userSettings = {
       "atlascode.rovodev.enabled" = false;
       "atlascode.bitbucket.enabled" = false;
-      "claudeCode.claudeProcessWrapper" = lib.getExe pkgs.claude-code;
+      "claude-code.claudeProcessWrapper" = lib.getExe pkgs.claude-code;
+      "direnv.restart.automatic" = true;
       "editor.fontFamily" = "'Monaspace Neon', monospace";
       "editor.fontLigatures" =
         "'calt', 'liga', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09'";
+      "editor.fontSize" = 15;
       "editor.inlineSuggest.fontFamily" = "'Monaspace Krypton', monospace";
+      "editor.minimap.autohide" = "scroll";
       "extensions.autoUpdate" = false;
       "files.insertFinalNewline" = true;
       "git.alwaysSignOff" = true;
@@ -96,7 +99,10 @@ in
         "*" = true;
       };
       "github.copilot.nextEditSuggestions.enabled" = true;
+      "terminal.integrated.fontLigatures.enabled" = true;
+      "terminal.integrated.fontSize" = 15;
       "update.mode" = "none";
+      "vim.useSystemClipboard" = true;
       "window.autoDetectColorScheme" = true;
       "workbench.iconTheme" = "catppuccin-mocha";
       "workbench.preferredDarkColorTheme" = "Catppuccin Mocha";

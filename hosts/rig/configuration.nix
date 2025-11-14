@@ -13,6 +13,7 @@
     ../../config/nixos/fwupd.nix
     ../../config/nixos/desktop-manager.nix
     ../../config/nixos/gnome.nix
+    ../../config/nixos/google-chrome.nix
     ../../config/nixos/ghostty.nix
     ../../config/nixos/docker.nix
     ../../config/nixos/libvirtd.nix
@@ -104,9 +105,6 @@
       #  thunderbird
     ];
   };
-
-  # Install firefox.
-  programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

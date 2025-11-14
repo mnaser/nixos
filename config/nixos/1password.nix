@@ -2,10 +2,15 @@
 
 {
   programs._1password.enable = true;
+
   programs._1password-gui = {
     enable = true;
     polkitPolicyOwners = [ "mnaser" ];
   };
+
+  programs.chromium.extensions = [
+    "aeblfdkhhhdcdjpifhhbdiojplfjncoa"
+  ];
 
   home-manager.users.mnaser =
     { ... }:

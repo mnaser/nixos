@@ -2,14 +2,16 @@
 
 {
   imports = [
+    ../../config/home-manager/fonts.nix
     ../../config/home-manager/bash.nix
     ../../config/home-manager/starship.nix
     ../../config/home-manager/eza.nix
     ../../config/home-manager/zoxide.nix
     ../../config/home-manager/ssh.nix
-    ../../config/home-manager/ghq.nix
     ../../config/home-manager/direnv.nix
     ../../config/home-manager/git.nix
+    ../../config/home-manager/ghq.nix
+    ../../config/home-manager/gh-dash.nix
     ../../config/home-manager/depot.nix
     ../../config/home-manager/vscode.nix
   ];
@@ -32,8 +34,10 @@
     chatterino7
     claude-code
     discord
+    element-desktop
     openlinkhub
     pinentry-gnome3
+    prismlauncher
     spotify
     teams-for-linux
     zoom-us
