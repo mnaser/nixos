@@ -5,8 +5,8 @@ let
     mktplcRef = {
       publisher = "anthropic";
       name = "claude-code";
-      version = "2.0.21";
-      hash = "sha256-D6TYXb4GnqZKNAZ8rqsYmjazhc7lUnhOfuvis3MVV5k=";
+      version = "2.0.37";
+      hash = "sha256-wXYdMoJhdH5S8EGdELVFbmwrwO7LHgYiEFqiUscQo4Y=";
     };
   };
 
@@ -14,8 +14,8 @@ let
     mktplcRef = {
       publisher = "Atlassian";
       name = "atlascode";
-      version = "4.1.24";
-      hash = "sha256-NiRgmE7JIjCcdELJu9X7Ks+tB/g2quQrwGhvhJ1bQQw=";
+      version = "4.1.45";
+      hash = "sha256-EjpkjnhzqY5dH4oH6MBhSQ4kqYP2umNjTh0kZI1RSdI=";
     };
   };
 
@@ -69,7 +69,7 @@ in
     userSettings = {
       "atlascode.rovodev.enabled" = false;
       "atlascode.bitbucket.enabled" = false;
-      "claude-code.claudeProcessWrapper" = lib.getExe pkgs.claude-code;
+      "claudeCode.claudeProcessWrapper" = lib.getExe pkgs.claude-code;
       "direnv.restart.automatic" = true;
       "editor.fontFamily" = "'Monaspace Neon', monospace";
       "editor.fontLigatures" =

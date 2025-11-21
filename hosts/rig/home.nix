@@ -32,7 +32,6 @@
 
   home.packages = with pkgs; [
     chatterino7
-    claude-code
     discord
     element-desktop
     openlinkhub
