@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-master.url = "github:nixos/nixpkgs/master";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -12,20 +13,29 @@
 
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    claude-desktop.url = "github:k3d3/claude-desktop-linux-flake";
+    claude-desktop.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
     {
       self,
       nixpkgs,
+      nixpkgs-master,
       home-manager,
       nixvim,
       treefmt-nix,
+      claude-desktop,
       ...
     }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      pkgs-master = import nixpkgs-master {
+        inherit system;
+        config.allowUnfree = true;
+      };
       treefmtEval = treefmt-nix.lib.evalModule nixpkgs.legacyPackages.x86_64-linux {
         projectRootFile = "flake.nix";
         programs.nixfmt.enable = true;
@@ -37,6 +47,7 @@
       nixosConfigurations = {
         rig = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = { inherit pkgs-master; };
           modules = [
             ./hosts/rig/configuration.nix
             ./modules/services/hardware/openlinkhub.nix
@@ -50,14 +61,17 @@
                 nixvim.homeModules.nixvim
               ];
 
-              # Optionally, use home-manager.extraSpecialArgs to pass
-              # arguments to home.nix
+              home-manager.extraSpecialArgs = {
+                inherit pkgs-master;
+                claude-desktop-pkg = claude-desktop.packages.${system}.claude-desktop-with-fhs;
+              };
             }
           ];
         };
 
         zenbook = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = { inherit pkgs-master; };
           modules = [
             ./hosts/zenbook/configuration.nix
             home-manager.nixosModules.home-manager
@@ -70,8 +84,10 @@
                 nixvim.homeModules.nixvim
               ];
 
-              # Optionally, use home-manager.extraSpecialArgs to pass
-              # arguments to home.nix
+              home-manager.extraSpecialArgs = {
+                inherit pkgs-master;
+                claude-desktop-pkg = claude-desktop.packages.${system}.claude-desktop-with-fhs;
+              };
             }
           ];
         };

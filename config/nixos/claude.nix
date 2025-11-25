@@ -1,12 +1,16 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-master, ... }:
 
 {
+  programs.chromium.extensions = [
+    "fcoeoabgfenejglbffodgkkbkcdhcgfn"
+  ];
+
   home-manager.users.mnaser =
     { ... }:
     {
-      home.packages = with pkgs; [
-        claude-code
-        xclip
+      home.packages = [
+        pkgs-master.claude-code
+        pkgs.xclip
       ];
     };
 }

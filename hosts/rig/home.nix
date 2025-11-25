@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-master, claude-desktop-pkg, ... }:
 
 {
   imports = [
@@ -30,7 +30,9 @@
   # changes in each release.
   home.stateVersion = "25.05";
 
-  home.packages = with pkgs; [
+  home.packages = [
+    claude-desktop-pkg
+  ] ++ (with pkgs; [
     chatterino7
     discord
     element-desktop
@@ -40,7 +42,7 @@
     spotify
     teams-for-linux
     zoom-us
-  ];
+  ]);
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
