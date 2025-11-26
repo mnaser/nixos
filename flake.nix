@@ -49,6 +49,7 @@
           inherit system;
           specialArgs = { inherit pkgs-master; };
           modules = [
+            { nixpkgs.overlays = [ (import ./overlays/gitbutler.nix) ]; }
             ./hosts/rig/configuration.nix
             ./modules/services/hardware/openlinkhub.nix
             home-manager.nixosModules.home-manager
@@ -73,6 +74,7 @@
           inherit system;
           specialArgs = { inherit pkgs-master; };
           modules = [
+            { nixpkgs.overlays = [ (import ./overlays/gitbutler.nix) ]; }
             ./hosts/zenbook/configuration.nix
             home-manager.nixosModules.home-manager
             {

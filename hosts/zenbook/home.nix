@@ -1,4 +1,10 @@
-{ config, pkgs, pkgs-master, claude-desktop-pkg, ... }:
+{
+  config,
+  pkgs,
+  pkgs-master,
+  claude-desktop-pkg,
+  ...
+}:
 
 {
   imports = [
@@ -32,7 +38,8 @@
 
   home.packages = [
     claude-desktop-pkg
-  ] ++ (with pkgs; [
+  ]
+  ++ (with pkgs; [
     chatterino7
     discord
     pinentry-gnome3
