@@ -5,6 +5,9 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
 
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
+
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -23,6 +26,7 @@
       self,
       nixpkgs,
       nixpkgs-master,
+      agenix,
       home-manager,
       nixvim,
       treefmt-nix,
@@ -49,7 +53,7 @@
           inherit system;
           specialArgs = { inherit pkgs-master; };
           modules = [
-            { nixpkgs.overlays = [ (import ./overlays/gitbutler.nix) ]; }
+            agenix.nixosModules.default
             ./hosts/rig/configuration.nix
             ./modules/services/hardware/openlinkhub.nix
             home-manager.nixosModules.home-manager
@@ -74,7 +78,7 @@
           inherit system;
           specialArgs = { inherit pkgs-master; };
           modules = [
-            { nixpkgs.overlays = [ (import ./overlays/gitbutler.nix) ]; }
+            agenix.nixosModules.default
             ./hosts/zenbook/configuration.nix
             home-manager.nixosModules.home-manager
             {
@@ -98,6 +102,8 @@
       devShells.${system}.default = pkgs.mkShell {
         packages = with pkgs; [
           nixfmt-rfc-style
+        ] ++ [
+          agenix.packages.${system}.default
         ];
       };
     };

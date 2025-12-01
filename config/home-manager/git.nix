@@ -15,6 +15,12 @@ rec {
     };
   };
 
+  programs.git.ignores = [
+    "**/.claude/settings.local.json"
+    ".direnv"
+    ".worktrees"
+  ];
+
   programs.git.hooks = {
     prepare-commit-msg = pkgs.writeShellScript "prepare-commit-msg.sh" ''
       ${lib.getExe' programs.git.package "git"} interpret-trailers --if-exists doNothing --trailer \

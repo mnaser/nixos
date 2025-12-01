@@ -15,6 +15,7 @@
     ../../config/nixos/gnome.nix
     ../../config/nixos/google-chrome.nix
     ../../config/nixos/ghostty.nix
+    ../../config/nixos/age.nix
     ../../config/nixos/claude.nix
     ../../config/nixos/docker.nix
     ../../config/nixos/libvirtd.nix

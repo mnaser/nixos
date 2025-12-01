@@ -11,6 +11,7 @@
     ../../config/home-manager/fonts.nix
     ../../config/home-manager/bash.nix
     ../../config/home-manager/starship.nix
+    ../../config/home-manager/bat.nix
     ../../config/home-manager/eza.nix
     ../../config/home-manager/zoxide.nix
     ../../config/home-manager/ssh.nix
@@ -20,6 +21,7 @@
     ../../config/home-manager/gh-dash.nix
     ../../config/home-manager/depot.nix
     ../../config/home-manager/vscode.nix
+    ../../config/home-manager/openstack.nix
   ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
