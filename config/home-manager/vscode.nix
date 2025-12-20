@@ -55,6 +55,7 @@ in
         ms-python.pylint
         ms-python.python
         ms-python.vscode-pylance
+        ms-vscode-remote.remote-containers
         ms-vscode-remote.remote-ssh
         redhat.vscode-yaml
         rust-lang.rust-analyzer

@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-master.url = "github:nixos/nixpkgs/master";
 
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
@@ -17,6 +16,8 @@
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
 
+    llm-agents-nix.url = "github:numtide/llm-agents.nix";
+
     claude-desktop.url = "github:k3d3/claude-desktop-linux-flake";
     claude-desktop.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -25,21 +26,20 @@
     {
       self,
       nixpkgs,
-      nixpkgs-master,
       agenix,
       home-manager,
       nixvim,
       treefmt-nix,
+      llm-agents-nix,
       claude-desktop,
       ...
     }:
     let
       system = "x86_64-linux";
+
       pkgs = nixpkgs.legacyPackages.${system};
-      pkgs-master = import nixpkgs-master {
-        inherit system;
-        config.allowUnfree = true;
-      };
+      llm-agents = llm-agents-nix.packages.${system};
+
       treefmtEval = treefmt-nix.lib.evalModule nixpkgs.legacyPackages.x86_64-linux {
         projectRootFile = "flake.nix";
         programs.nixfmt.enable = true;
@@ -51,7 +51,11 @@
       nixosConfigurations = {
         rig = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit pkgs-master; };
+
+          specialArgs = {
+            inherit llm-agents;
+          };
+
           modules = [
             agenix.nixosModules.default
             ./hosts/rig/configuration.nix
@@ -67,7 +71,8 @@
               ];
 
               home-manager.extraSpecialArgs = {
-                inherit pkgs-master;
+                inherit llm-agents;
+
                 claude-desktop-pkg = claude-desktop.packages.${system}.claude-desktop-with-fhs;
               };
             }
@@ -76,7 +81,11 @@
 
         zenbook = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit pkgs-master; };
+
+          specialArgs = {
+            llm-agents = llm-agents.packages.${system};
+          };
+
           modules = [
             agenix.nixosModules.default
             ./hosts/zenbook/configuration.nix
@@ -91,7 +100,8 @@
               ];
 
               home-manager.extraSpecialArgs = {
-                inherit pkgs-master;
+                inherit llm-agents;
+
                 claude-desktop-pkg = claude-desktop.packages.${system}.claude-desktop-with-fhs;
               };
             }
@@ -100,11 +110,14 @@
       };
 
       devShells.${system}.default = pkgs.mkShell {
-        packages = with pkgs; [
-          nixfmt-rfc-style
-        ] ++ [
-          agenix.packages.${system}.default
-        ];
+        packages =
+          with pkgs;
+          [
+            nixfmt-rfc-style
+          ]
+          ++ [
+            agenix.packages.${system}.default
+          ];
       };
     };
 }

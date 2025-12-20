@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  pkgs-master,
   claude-desktop-pkg,
   ...
 }:
@@ -21,6 +20,9 @@
     ../../config/home-manager/ghq.nix
     ../../config/home-manager/depot.nix
     ../../config/home-manager/vscode.nix
+    ../../config/home-manager/zed-editor.nix
+    ../../config/home-manager/mcp.nix
+    ../../config/home-manager/opencode.nix
     ../../config/home-manager/openstack.nix
   ];
   # Home Manager needs a bit of information about you and the
@@ -45,6 +47,7 @@
     chatterino7
     discord
     pinentry-gnome3
+    slack
     spotify
     teams-for-linux
     zoom-us

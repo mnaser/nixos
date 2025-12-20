@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  pkgs-master,
   claude-desktop-pkg,
   ...
 }:
@@ -20,7 +19,10 @@
     ../../config/home-manager/ghq.nix
     ../../config/home-manager/gh-dash.nix
     ../../config/home-manager/depot.nix
+    ../../config/home-manager/mcp.nix
     ../../config/home-manager/vscode.nix
+    ../../config/home-manager/zed-editor.nix
+    ../../config/home-manager/opencode.nix
     ../../config/home-manager/openstack.nix
   ];
   # Home Manager needs a bit of information about you and the
@@ -48,8 +50,11 @@
     openlinkhub
     pinentry-gnome3
     prismlauncher
+    slack
     spotify
+    streamlink
     teams-for-linux
+    vlc
     zoom-us
   ]);
 
