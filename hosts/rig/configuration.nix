@@ -11,8 +11,7 @@
     ../../config/nixos/plymouth.nix
     ../../config/nixos/iio.nix
     ../../config/nixos/fwupd.nix
-    ../../config/nixos/desktop-manager.nix
-    ../../config/nixos/gnome.nix
+
     ../../config/nixos/google-chrome.nix
     ../../config/nixos/ghostty.nix
     ../../config/nixos/age.nix
@@ -144,6 +143,9 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
+
+  # Desktop environment
+  modules.desktop.environment = "gnome";
 
   # Power management
   hardware.enableRedistributableFirmware = true;

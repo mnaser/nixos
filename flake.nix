@@ -60,6 +60,7 @@
             agenix.nixosModules.default
             ./hosts/rig/configuration.nix
             ./modules/services/hardware/openlinkhub.nix
+            ./modules/desktop
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -89,6 +90,7 @@
           modules = [
             agenix.nixosModules.default
             ./hosts/zenbook/configuration.nix
+            ./modules/desktop
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
