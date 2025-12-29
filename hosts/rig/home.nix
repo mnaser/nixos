@@ -9,6 +9,7 @@
   imports = [
     ../../config/home-manager/fonts.nix
     ../../config/home-manager/bash.nix
+    ../../config/home-manager/tmux.nix
     ../../config/home-manager/starship.nix
     ../../config/home-manager/bat.nix
     ../../config/home-manager/eza.nix

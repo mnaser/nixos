@@ -13,22 +13,22 @@ let
     rev = "f232228244495c018b3c1857436cf491ebb79bbb";
   };
 
-  claude-code = pkgs.symlinkJoin {
-    name = "claude-code-wrapped";
-    paths = [ llm-agents.claude-code ];
-    nativeBuildInputs = [ pkgs.makeWrapper ];
-    postBuild = ''
-      wrapProgram $out/bin/claude \
-        --set TMPDIR /tmp/claude \
-        --run 'source ${config.age.secrets.mcp.path}' \
-        --prefix PATH : ${
-          lib.makeBinPath [
-            pkgs.xclip
-            pkgs.bubblewrap
-            pkgs.socat
-            pkgs.jq
-          ]
-        }
+  claude-code = pkgs.writeShellApplication {
+    name = "claude";
+    runtimeInputs = [
+      pkgs.xclip
+      pkgs.bubblewrap
+      pkgs.socat
+      pkgs.jq
+    ];
+    runtimeEnv = {
+      TMPDIR = "/tmp/claude";
+    };
+    text = ''
+      # shellcheck source=/dev/null
+      source ${config.age.secrets.mcp.path}
+
+      exec ${llm-agents.claude-code}/bin/claude "$@"
     '';
   };
 in
@@ -56,11 +56,19 @@ in
             "Bash(tailscale status:*)"
             "Bash(tailscale status:*)"
             "Edit(/home/mnaser/.cache/gh)"
+            "Edit(/home/mnaser/.cache/pnpm)"
+            "Edit(/home/mnaser/.cargo)"
             "Edit(/home/mnaser/src)"
+            "WebFetch(domain:ansible-galaxy-ng.s3.dualstack.us-east-1.amazonaws.com)"
+            "WebFetch(domain:api.github.com)"
+            "WebFetch(domain:channels.nixos.org)"
+            "WebFetch(domain:files.pythonhosted.org)"
+            "WebFetch(domain:galaxy.ansible.com)"
             "WebFetch(domain:ghcr.io)"
             "WebFetch(domain:github.com)"
             "WebFetch(domain:githubusercontent.com)"
             "WebFetch(domain:opendev.org)"
+            "WebFetch(domain:pypi.org)"
             "WebSearch"
             "mcp__atlassian-mcp-server__atlassianUserInfo"
             "mcp__atlassian-mcp-server__getAccessibleAtlassianResources"
@@ -100,6 +108,7 @@ in
         sandbox = {
           enabled = true;
           allowUnsandboxedCommands = false;
+          excludedCommands = [ "git" ];
         };
       };
 
