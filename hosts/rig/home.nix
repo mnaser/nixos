@@ -15,6 +15,7 @@
     ../../config/home-manager/eza.nix
     ../../config/home-manager/zoxide.nix
     ../../config/home-manager/ssh.nix
+    ../../config/home-manager/mise.nix
     ../../config/home-manager/direnv.nix
     ../../config/home-manager/git.nix
     ../../config/home-manager/ghq.nix
@@ -25,6 +26,7 @@
     ../../config/home-manager/zed-editor.nix
     ../../config/home-manager/opencode.nix
     ../../config/home-manager/openstack.nix
+    ../../config/home-manager/markdown.nix
   ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.

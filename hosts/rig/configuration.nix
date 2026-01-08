@@ -106,6 +106,9 @@
     packages = with pkgs; [
       #  thunderbird
     ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFUZ4e9irE5jBQZKxpqnoeJns6pmSUNNW0xVTJWB31zF"
+    ];
   };
 
   # Allow unfree packages

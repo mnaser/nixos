@@ -15,6 +15,7 @@
   programs.zed-editor.extensions = [
     "catppuccin"
     "catppuccin-icons"
+    "just"
     "nix"
     "opencode"
     "terraform"

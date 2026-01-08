@@ -55,8 +55,7 @@ in
             "Bash(stern:*)"
             "Bash(tailscale status:*)"
             "Bash(tailscale status:*)"
-            "Edit(/home/mnaser/.cache/gh)"
-            "Edit(/home/mnaser/.cache/pnpm)"
+            "Edit(/home/mnaser/.cache)"
             "Edit(/home/mnaser/.cargo)"
             "Edit(/home/mnaser/src)"
             "WebFetch(domain:ansible-galaxy-ng.s3.dualstack.us-east-1.amazonaws.com)"
@@ -105,10 +104,17 @@ in
             "mcp__zendesk__create_ticket_comment"
           ];
         };
-        sandbox = {
-          enabled = true;
-          allowUnsandboxedCommands = false;
-          excludedCommands = [ "git" ];
+        extraKnownMarketplaces = {
+          vexxhost = {
+            source = {
+              source = "github";
+              repo = "vexxhost/claude-code-plugins";
+            };
+          };
+        };
+        enabledPlugins = {
+          "git@vexxhost" = true;
+          "renovate@vexxhost" = true;
         };
       };
 
